@@ -1,4 +1,4 @@
-﻿using Payment_Back.Application.DTOs;
+﻿/*using Payment_Back.Application.DTOs;
 using Payment_Back.Domain.Entities;
 
 namespace Payment_Back.Application.Mappers
@@ -28,4 +28,4 @@ namespace Payment_Back.Application.Mappers
             };
         }
     }
-}
+}*/

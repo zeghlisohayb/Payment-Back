@@ -19,7 +19,7 @@ namespace Payment_Back.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreatePaymentRequest request)
         {
-            var result = await _service.CreatePaymentAsync(request);
+            var result = await _service.CreatePayment(request);
             return Ok(result);
         }
     }

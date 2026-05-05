@@ -4,7 +4,10 @@ namespace Payment_Back.Application.Interfaces
 {
     public interface IPaymentRepository
     {
-        Task AddAsync(Payment payment);
-        Task SaveChangesAsync();
+        Task Add(Payment payment);
+
+        Task<Payment> GetByExternalId(string externalId);
+
+        Task Update(Payment payment);
     }
 }

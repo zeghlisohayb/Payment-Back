@@ -4,7 +4,10 @@ namespace Payment_Back.Application.Interfaces
 {
     public interface IPaymentService
     {
-        Task<PaymentResponse> CreatePaymentAsync(CreatePaymentRequest request);
+        Task<string> CreatePayment(CreatePaymentRequest request);
 
+        Task ConfirmPayment(string externalId);
+
+        Task FailPayment(string externalId);
     }
 }

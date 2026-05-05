@@ -1,24 +1,25 @@
-﻿using Payment_Back.Application.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using PayPalCheckoutSdk.Core;
 
 namespace Payment_Back.Infrastructure.PaymentProviders
 {
-    public class PaymentProviderFactory
+    public class PayPalClientFactory
     {
-        private readonly IEnumerable<IPaymentProvider> _providers;
+        private readonly IConfiguration _configuration;
 
-        public PaymentProviderFactory(IEnumerable<IPaymentProvider> providers)
+        public PayPalClientFactory(IConfiguration configuration)
         {
-            _providers = providers;
+            _configuration = configuration;
         }
 
-        public IPaymentProvider Get(string name)
+        public PayPalHttpClient Create()
         {
-            var provider = _providers.FirstOrDefault(p => p.Name == name);
+            var clientId = _configuration["PayPal:ClientId"];
+            var secret = _configuration["PayPal:Secret"];
 
-            if (provider == null)
-                throw new Exception("Provider not found");
+            var environment = new SandboxEnvironment(clientId, secret);
 
-            return provider;
+            return new PayPalHttpClient(environment);
         }
     }
 }

@@ -4,6 +4,6 @@
     {
         string Name { get; }
 
-        Task<string> CreatePayment(decimal amount);
+        Task<(string approvalUrl, string externalId)> CreatePayment(decimal amount, string currency);
     }
 }

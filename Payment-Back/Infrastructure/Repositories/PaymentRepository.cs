@@ -1,19 +1,35 @@
-﻿using Payment_Back.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Payment_Back.Application.Interfaces;
 using Payment_Back.Domain.Entities;
+using Payment_Back.Infrastructure.Data;
 
 namespace Payment_Back.Infrastructure.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        public Task AddAsync(Payment payment)
+        private readonly PaymentDbContext _context;
+
+        public PaymentRepository(PaymentDbContext context)
         {
-            // temporaire (on ajoutera EF après)
-            return Task.CompletedTask;
+            _context = context;
         }
 
-        public Task SaveChangesAsync()
+        public async Task Add(Payment payment)
         {
-            return Task.CompletedTask;
+            _context.Payments.Add(payment);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Payment> GetByExternalId(string externalId)
+        {
+            return await _context.Payments
+                .FirstOrDefaultAsync(p => p.ExternalId == externalId);
+        }
+
+        public async Task Update(Payment payment)
+        {
+            _context.Payments.Update(payment);
+            await _context.SaveChangesAsync();
         }
     }
 }
