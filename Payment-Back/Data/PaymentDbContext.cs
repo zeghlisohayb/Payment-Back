@@ -12,5 +12,7 @@ namespace Payment_Back.Infrastructure.Data
         }
 
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<EscrowAccount> EscrowAccounts { get; set; }
+        public DbSet<EscrowTransaction> EscrowTransactions { get; set; }
     }
 }

@@ -9,5 +9,9 @@ namespace Payment_Back.Application.Interfaces
         Task ConfirmPayment(string externalId);
 
         Task FailPayment(string externalId);
+
+        Task RefundPayment(string externalId);
+
+        Task ReleaseEscrow(Guid paymentId);
     }
 }

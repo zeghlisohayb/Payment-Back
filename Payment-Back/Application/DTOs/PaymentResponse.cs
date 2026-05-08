@@ -2,10 +2,14 @@
 {
     public class PaymentResponse
     {
-        public string ApprovalUrl { get; set; } = string.Empty;
+        public Guid PaymentId { get; set; }
 
-        public string Status { get; set; } = string.Empty;
+        public string ApprovalUrl { get; set; }
 
-        public string Currency { get; set; } = string.Empty;
+        public string Status { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public string Currency { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace Payment_Back.Domain.Entities
         public string ExternalId { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; }
+
+        public string ItemId { get; set; } = string.Empty;
     }
 }
 
