@@ -12,10 +12,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Payment-Back/Payment-Back.csproj", "Payment-Back/"]
-RUN dotnet restore "./Payment-Back/Payment-Back.csproj"
+COPY ["Payment-Back.csproj", "./"]
+RUN dotnet restore "./Payment-Back.csproj"
 COPY . .
-WORKDIR "/src/Payment-Back"
+WORKDIR /src
 RUN dotnet build "./Payment-Back.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage

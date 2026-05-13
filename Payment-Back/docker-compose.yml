@@ -1,0 +1,19 @@
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: payment-sql
+    environment:
+      SA_PASSWORD: "YourStrong@Pass123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+
+  payment-back:
+    build:
+      context: .
+    container_name: payment-back
+    depends_on:
+      - sqlserver
+    ports:
+      - "7178:8080"

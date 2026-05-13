@@ -18,7 +18,7 @@ namespace Payment_Back.Infrastructure.Messaging
         {
             var config = new ConsumerConfig
             {
-                BootstrapServers = "localhost:9092",
+                BootstrapServers = "host.docker.internal:9092",
                 GroupId = "payment-group",
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
