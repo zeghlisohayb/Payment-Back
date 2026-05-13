@@ -31,5 +31,10 @@ namespace Payment_Back.Infrastructure.Repositories
             _context.Payments.Update(payment);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Payment>> GetAll()
+        {
+            return await _context.Payments.ToListAsync();
+        }
     }
 }

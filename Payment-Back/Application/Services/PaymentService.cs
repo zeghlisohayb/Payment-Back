@@ -178,5 +178,9 @@ namespace Payment_Back.Application.Services
 
             await _context.SaveChangesAsync();
         }
+        public async Task<IEnumerable<Payment>> GetAllPayments()
+        {
+            return await _repo.GetAll();
+        }
     }
 }

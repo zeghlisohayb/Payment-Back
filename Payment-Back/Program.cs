@@ -4,6 +4,7 @@ using Payment_Back.Application.Services;
 using Payment_Back.Infrastructure.Data;
 using Payment_Back.Infrastructure.PaymentProviders;
 using Payment_Back.Infrastructure.Repositories;
+using Payment_Back.Infrastructure.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,23 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IPaymentProvider, PaypalProvider>();
 builder.Services.AddScoped<PaymentProviderFactory>();
 builder.Services.AddScoped<PayPalClientFactory>();
+builder.Services.AddSingleton<KafkaConsumer>();
+builder.Services.AddCors(options =>
+
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
+
+var kafkaConsumer = app.Services.GetRequiredService<KafkaConsumer>();
+kafkaConsumer.Start();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,7 +49,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAngular");
 app.UseAuthorization();
 
 app.MapControllers();

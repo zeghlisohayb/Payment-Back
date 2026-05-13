@@ -39,5 +39,14 @@ namespace Payment_Back.Controllers
             await _service.ReleaseEscrow(paymentId);
             return Ok("Escrow released");
         }
+
+        // HISORICAL PAYMENTS
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var payments = await _service.GetAllPayments();
+            return Ok(payments);
+        }
     }
 }

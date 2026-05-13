@@ -1,4 +1,5 @@
 ﻿using Payment_Back.Application.DTOs;
+using Payment_Back.Domain.Entities;
 
 namespace Payment_Back.Application.Interfaces
 {
@@ -13,5 +14,7 @@ namespace Payment_Back.Application.Interfaces
         Task RefundPayment(string externalId);
 
         Task ReleaseEscrow(Guid paymentId);
+
+        Task<IEnumerable<Payment>> GetAllPayments();
     }
 }

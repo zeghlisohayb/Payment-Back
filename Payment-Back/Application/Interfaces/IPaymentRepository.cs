@@ -9,5 +9,7 @@ namespace Payment_Back.Application.Interfaces
         Task<Payment> GetByExternalId(string externalId);
 
         Task Update(Payment payment);
+
+        Task<IEnumerable<Payment>> GetAll();
     }
 }
